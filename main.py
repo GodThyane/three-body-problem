@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app, support_credentials=True)
 app.config['SECRET_KEY'] = 'secret'
 app.config['CORS_HEADERS'] = 'Content-Type'
-socketio = SocketIO(app, cors_allowed_origins="*",  logger=True)
+socketio = SocketIO(app, cors_allowed_origins="*",  logger=True, asyncMode='eventlet')
 
 
 @socketio.on('event')

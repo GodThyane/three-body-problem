@@ -61,7 +61,7 @@ class ThreeBody:
         # Parámetros iniciales
         self.init_params = np.array([self.r1, self.r2, self.r3, self.v1, self.v2, self.v3])  # Creación de array inicial
         self.init_params = self.init_params.flatten()  # Convertir array en 1 dimesión
-        self.time_span = np.linspace(0, t, t * 20)  # t periodos orbitales, t*25 puntos
+        self.time_span = np.linspace(0, t, t * 25)  # t periodos orbitales, t*25 puntos
 
         self.three_body_sol = integrat.odeint(self.ThreeBodyEquations, self.init_params,
                                               self.time_span, args=(self.G, self.m1, self.m2, self.m3))

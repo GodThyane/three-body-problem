@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 from matplotlib.animation import FuncAnimation, PillowWriter
 from io import BytesIO
-
 import base64
 
 

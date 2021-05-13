@@ -7,6 +7,8 @@ from matplotlib import animation
 from matplotlib.animation import FuncAnimation, PillowWriter
 from io import BytesIO
 import base64
+import gunicorn
+import eventlet
 
 
 class ThreeBody:

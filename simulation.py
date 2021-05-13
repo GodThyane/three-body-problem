@@ -5,6 +5,7 @@ import scipy.integrate as integrat
 import matplotlib.pyplot as plt
 from matplotlib import animation
 from matplotlib.animation import FuncAnimation, PillowWriter
+from io import BytesIO
 
 import base64
 
@@ -154,3 +155,38 @@ class ThreeBody:
         strGif = "threeBody" + self.id + ".gif"
         with open(strGif, "rb") as image_file:
             return base64.b64encode(image_file.read()).decode("ascii")
+
+
+class ImgThreeBody:
+    # Definición constante de gravitación universal.
+    G = 6.67408e-11
+
+    def __init__(self, m, r):
+        self.fig = plt.figure(figsize=(8, 8))
+        self.ax = self.fig.add_subplot(111, projection="3d")
+
+        # Definir masas
+        self.m1 = m[0]  # m1
+        self.m2 = m[1]  # m2
+        self.m3 = m[2]  # m3
+
+        self.point, = self.ax.plot(r[0], r[1], r[2], marker="o",
+                                   color="darkblue", markersize=self.m1 * 7)
+
+        self.point2, = self.ax.plot(r[3], r[4], r[5], marker="o",
+                                    color="tab:red", markersize=self.m2 * 7)
+
+        self.point3, = self.ax.plot(r[6], r[7], r[8], marker="o",
+                                    color="black", markersize=self.m3 * 7)
+
+        self.ax.set_xlabel("x-coordinate", fontsize=14)
+        self.ax.set_ylabel("y-coordinate", fontsize=14)
+        self.ax.set_zlabel("z-coordinate", fontsize=14)
+        self.ax.set_title("Visualización inicial \n", fontsize=14)
+
+    def GetImg(self):
+        buf = BytesIO()
+        self.fig.savefig(buf, format="png")
+
+        data = base64.b64encode(buf.getbuffer()).decode("ascii")
+        return data

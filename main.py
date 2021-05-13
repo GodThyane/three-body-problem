@@ -2,6 +2,7 @@ from flask import Flask
 from flask_socketio import SocketIO, emit
 from flask_cors import cross_origin
 from simulation import ThreeBody
+from simulation import ImgThreeBody
 import os
 
 app = Flask(__name__)
@@ -19,9 +20,19 @@ def handleMessage(message):
                       body['positions'], body['velocities'], body['t'],
                       str(body['id']))
     three.Simulation()
-    emit("event", {"res": three.gif()})
+    emit("event", {"isGif": True, "res": three.gif()})
     strGif = "threeBody" + str(body['id']) + ".gif"
     os.remove(strGif)
+    return 'OK'
+
+
+@socketio.on('img')
+@cross_origin()
+def handleMessage(message):
+    body = message['body']
+
+    three = ImgThreeBody(body['masses'], body['positions'])
+    emit("event", {"isGif": False, "res": three.GetImg()})
     return 'OK'
 
 

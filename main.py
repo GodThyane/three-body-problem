@@ -4,6 +4,7 @@ from flask_cors import cross_origin, CORS
 from simulation import ThreeBody
 from simulation import ImgThreeBody
 import os
+import eventlet
 
 app = Flask(__name__)
 # Se inicializan los CORS para evitar problemas al momento de hacer peticiones al backend

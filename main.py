@@ -5,17 +5,12 @@ from simulation import ThreeBody
 from simulation import ImgThreeBody
 import os
 
-# for socketio
-import eventlet
-
-eventlet.monkey_patch()
-
 app = Flask(__name__)
 # Se inicializan los CORS para evitar problemas al momento de hacer peticiones al backend
 CORS(app, support_credentials=True)
 app.config['SECRET_KEY'] = 'secret'
 app.config['CORS_HEADERS'] = 'Content-Type'
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet', logger=True)
+socketio = SocketIO(app, cors_allowed_origins="*",  logger=True)
 
 
 @socketio.on('event')

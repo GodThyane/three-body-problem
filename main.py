@@ -4,14 +4,13 @@ from flask_cors import cross_origin, CORS
 from simulation import ThreeBody
 from simulation import ImgThreeBody
 import os
-import eventlet
 
 app = Flask(__name__)
 # Se inicializan los CORS para evitar problemas al momento de hacer peticiones al backend
 CORS(app, support_credentials=True)
 app.config['SECRET_KEY'] = 'secret'
 app.config['CORS_HEADERS'] = 'Content-Type'
-socketio = SocketIO(app, cors_allowed_origins="*",  logger=True, asyncMode='eventlet')
+socketio = SocketIO(app, cors_allowed_origins="*",  logger=True)
 
 
 @socketio.on('event')

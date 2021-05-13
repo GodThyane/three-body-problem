@@ -1,11 +1,12 @@
 from flask import Flask
 from flask_socketio import SocketIO, emit
-from flask_cors import cross_origin
+from flask_cors import cross_origin, CORS
 from simulation import ThreeBody
 from simulation import ImgThreeBody
 import os
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config['SECRET_KEY'] = 'secret'
 app.config['CORS_HEADERS'] = 'Content-Type'
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
